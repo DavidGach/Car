@@ -90,6 +90,7 @@
 .close{
   color: red;
   opacity: 100%;
+
 }
 
 
@@ -184,7 +185,8 @@ $(document).ready(function() {
 
                       <div class="img-wrap d">
                               <a href="del.php?id=<?= $row['id'] ?>">Delete</a>
-                           <img src="adminImages/<?php echo $row["url"]; ?>" class="img-responsive">
+                           <img src="../user/media/images/slider/<?php echo $row["url"];?>" class="img-thumbnail" style="display: inline; width:640px; height:300px; " >
+                           <input type="date" name="" value="">
                          </div>
                        </div>
                     <?php

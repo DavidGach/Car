@@ -1,3 +1,9 @@
+<?php
+include("config.php");
+
+
+
+ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,22 +18,6 @@
 	<link rel="stylesheet" href="media/css/style.css">
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 </head>
-
-<style>
-
-	.slide1 {
-		background-image: url('media/images/slider/slide1.jpg');
-	}
-
-	.slide2 {
-		background-image: url('media/images/slider/slide2.jpg');
-	}
-
-	.slide3 {
-		background-image: url('media/images/slider/slide3.jpg');
-	}
-
-</style>
 
 <body>
 
@@ -50,28 +40,42 @@
 			</div>
 		</nav>
 
+
 		<div id="arrow-left" class="arrow">&larr;</div>
 
+
+
 		<div id="slider">
-			<div class="slide slide1">
+
+<?php
+
+$sql = "SELECT id, url FROM images";
+    $result = $db->query($sql);
+
+    if ($result->num_rows > 0) {
+        // output data of each row
+        while($row = $result->fetch_assoc()) {
+            ?>
+
+			<div class="slide" style='background-image: url("media/images/slider/<?php echo $row["url"]; ?>");'>
 				<div class="slide-content">
 					<span class="date">27.11.</span>
 					<span class="title">Vintage Auto Exhibition</span>
 				</div>
 			</div>
-			<div class="slide slide2">
-				<div class="slide-content">
-					<span class="date">28.11.</span>
-					<span class="title">Vintage Auto Exhibition</span>
-				</div>
-			</div>
-			<div class="slide slide3">
-				<div class="slide-content">
-					<span class="date">29.11.</span>
-					<span class="title">Vintage Auto Exhibition</span>
-				</div>
-			</div>
+
+      <?php
+    }
+    } else {
+    echo "0 results";
+    }
+    ?>
+
+
 		</div>
+
+
+
 
 		<div id="arrow-right" class="arrow">&rarr;</div>
 	</header>
@@ -79,18 +83,33 @@
 	<main>
 		<section id="services">
 			<h1>The Corner Garage For Collector Cars</h1>
+
+<?php
+$sql = "SELECT * FROM services";
+    $result = $db->query($sql);
+$arr = array();
+    if ($result->num_rows > 0) {
+        // output data of each row
+        while($row = $result->fetch_assoc()) {
+          array_push($arr,$row["keyword"]) ;
+        }
+        } else {
+        echo "0 results";
+        }
+
+ ?>
 			<div class="cards-container">
 				<div class="card modify">
 					<img src="media/images/modify.png">
-					<h3>Modify</h3>
+					<h3><?php echo $arr[0]; ?></h3>
 				</div>
 				<div class="card buy">
 					<img src="media/images/buy.png">
-					<h3>Buy</h3>
+					<h3><?php echo $arr[1]; ?></h3>
 				</div>
 				<div class="card repair">
 					<img src="media/images/repair.png">
-					<h3>Repair</h3>
+					<h3><?php echo $arr[2]; ?></h3>
 				</div>
 			</div>
 			<div class="animation">
@@ -100,6 +119,8 @@
 					<img src="media/images/car.png">
 				</div>
 			</div>
+
+
 		</section>
 
 		<section id="contact">
