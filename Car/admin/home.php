@@ -17,6 +17,7 @@
     <link href="assets/css/custom.css" rel="stylesheet" />
      <!-- GOOGLE FONTS-->
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
    <style media="screen">
    .gallery-title
 {
@@ -79,20 +80,36 @@
     ...
 }
 .img-wrap .close {
-    position: absolute;
-    top: 2px;
-    right: 2px;
-    z-index: 100;
-    color: red;
-    opacity: 100%;
-    ...
-}
+  width: 80%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  }
 .close{
   color: red;
   opacity: 100%;
 
 }
 
+.pics-holder {
+	width: 80%;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.pic {
+	flex-basis: 416px;
+	height: 234px;
+	margin: 30px;
+  margin-top: 0px;
+	background-position: center;
+	background-size: contain;
+	background-repeat: no-repeat;
+
+}
 
    </style>
 
@@ -172,7 +189,7 @@ $(document).ready(function() {
     <br>
 
         <?php
-        $sql = "SELECT id, url FROM images";
+        $sql = "SELECT * FROM images";
             $result = $db->query($sql);
 
             if ($result->num_rows > 0) {
@@ -183,12 +200,40 @@ $(document).ready(function() {
 
                     <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter spray">
 
-                      <div class="img-wrap d">
-                              <a href="del.php?id=<?= $row['id'] ?>">Delete</a>
-                           <img src="../user/media/images/slider/<?php echo $row["url"];?>" class="img-thumbnail" style="display: inline; width:640px; height:300px; " >
-                           <input type="date" name="" value="">
+                      <div style="margin-left: 30px;">
+
+
+                            <form method="post" action="home.php">
+                              <a  href="del.php?id=<?= $row['id'] ?>">Delete</a>
+                              <input style="margin-left: 10px; height: 30px; " type="date" name="date" value="<?php echo $row["date"]; ?>" >
+                              <input type="submit" id="bt<?php echo $row["id"]; ?>" name="bt<?php echo $row["id"]; ?>" style="height: 30px; width: 60px;" value="save" >
+
+                           </form>
+
+                           <?php
+
+                           if (isset($_POST["bt".$row["id"]])) {
+                             $sql = "UPDATE `images` SET `date` = '".$_POST["date"]."' WHERE `images`.`id` = ".$row["id"];
+                             if (!mysqli_query($db, $sql)) {
+                                 echo " <script>alert('error saving')</script>";
+                             }else {
+                               ?>
+                               <script type="text/javascript">
+                                 getElementById('bt<?php echo $row["id"]; ?>').value=<?php echo$_POST["date"]; ?>
+                               </script>
+                               <?php
+                             }
+                           }
+
+                           ?>
+                           </div>
+                           <div class="pics-holder">
+                          		<div class="pic" style='background-image: url("../user/media/images/slider/<?php echo $row["url"];?>");'></div>
+
+
                          </div>
                        </div>
+
                     <?php
                 }
             } else {

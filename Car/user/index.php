@@ -1,9 +1,5 @@
 <?php
-include("config.php");
-
-
-
- ?>
+include("config.php"); ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -141,7 +137,7 @@ $arr = array();
 
 				<div class="form">
 					<h2>Get in touch</h2>
-					<form method="post">
+					<form method="post" action="index.php">
 						<div class="left">
 							<input required id="name" type="text" name="name" placeholder="Name">
 							<p class="name"></p>
