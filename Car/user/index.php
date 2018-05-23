@@ -84,10 +84,13 @@ $sql = "SELECT id, url FROM images";
 $sql = "SELECT * FROM services";
     $result = $db->query($sql);
 $arr = array();
+$arrimg = array();
+
     if ($result->num_rows > 0) {
         // output data of each row
         while($row = $result->fetch_assoc()) {
-          array_push($arr,$row["keyword"]) ;
+					array_push($arr,$row["keyword"]) ;
+          array_push($arrimg,$row["url"]) ;
         }
         } else {
         echo "0 results";
@@ -96,15 +99,15 @@ $arr = array();
  ?>
 			<div class="cards-container">
 				<div class="card modify">
-					<img src="media/images/modify.png">
+					<img src="media/images/<?php echo $arrimg[0]; ?>">
 					<h3><?php echo $arr[0]; ?></h3>
 				</div>
 				<div class="card buy">
-					<img src="media/images/buy.png">
+					<img src="media/images/<?php echo $arrimg[1]; ?>">
 					<h3><?php echo $arr[1]; ?></h3>
 				</div>
 				<div class="card repair">
-					<img src="media/images/repair.png">
+					<img src="media/images/<?php echo $arrimg[2]; ?>">
 					<h3><?php echo $arr[2]; ?></h3>
 				</div>
 			</div>
@@ -112,7 +115,7 @@ $arr = array();
 				<div class="mountains"></div>
 				<div class="trees"></div>
 				<div class="car">
-					<img src="media/images/car.png">
+					<img src="media/images/<?php echo $arrimg[3]; ?>">
 				</div>
 			</div>
 
@@ -137,7 +140,7 @@ $arr = array();
 
 				<div class="form">
 					<h2>Get in touch</h2>
-					<form method="post" action="index.php">
+					<form method="post" action="form.php">
 						<div class="left">
 							<input required id="name" type="text" name="name" placeholder="Name">
 							<p class="name"></p>
@@ -145,20 +148,21 @@ $arr = array();
 							<p class="email"></p>
 							<input required id="subject" type="text" name="subject" placeholder="Subject">
 							<p class="subject"></p>
-							<textarea required placeholder="Text"></textarea>
+							<textarea name="text" required placeholder="Text"></textarea>
+
 							<p class="text"></p>
 						</div>
 						<div class="right">
 							<div class="rbtn">
 								<label class="rbtn-holder">
-									<input required id="male" type="radio" name="gender">
+									<input id="male" type="radio" name="gender" value="male">Male
 									<span class="checkmark"></span>
-									Male
+
 								</label>
 								<label class="rbtn-holder">
-									<input required id="female" type="radio" name="gender">
+									<input id="female" type="radio" name="gender" value="female" >Female
 									<span class="checkmark"></span>
-									Female
+
 								</label>
 							</div>
 							<p class="gender"></p>
@@ -167,28 +171,28 @@ $arr = array();
 								<ul>
 									<li>
 										<label class="chbx-holder">
-											<input type="checkbox" name="images">
+											<input type="checkbox" name="arr[]" value="images">
 											<span class="checkmark"></span>
 											Receive images
 										</label>
 									</li>
 									<li>
 										<label class="chbx-holder">
-											<input type="checkbox" name="promotions">
+											<input type="checkbox" name="arr[]" value="promotions">
 											<span class="checkmark"></span>
 											Receive promotions
 										</label>
 									</li>
 									<li>
 										<label class="chbx-holder">
-											<input type="checkbox" name="updates">
+											<input type="checkbox" name="arr[]" value="updates">
 											<span class="checkmark"></span>
 											Receive updates
 										</label>
 									</li>
 									<li>
 										<label class="chbx-holder">
-											<input type="checkbox" name="job-offers">
+											<input type="checkbox" name="arr[]" value="joboffers">
 											<span class="checkmark"></span>
 											Receive job offers
 										</label>

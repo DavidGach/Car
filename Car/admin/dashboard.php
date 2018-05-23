@@ -78,8 +78,6 @@
           while($row = $result->fetch_assoc()) {
           $i++;
           }
-      }else {
-        echo "error";
       }
    ?>
   <a href="subscribers.php">

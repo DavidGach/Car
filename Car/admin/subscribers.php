@@ -115,13 +115,14 @@
     <div id="<?php  echo $row["name"].$row["id"]."panel";?>" class="panel"><h3><b>Subject:</b> <?php echo  $row["subject"]; ?></h3>
       <h5><b>Name:</b><?php echo  $row["name"]; ?></h5>
       <h5><b>Text:</b><?php echo  $row["text"]; ?></h5>
+      <h5><a href="del1.php?id=<?php echo  $row["id"]; ?>" style="color:red;">delete</a></h5>
 
     </div>
 
     <?php
           }
       }else {
-        echo "error";
+        echo "0 subscribers";
       }
        ?>
 
