@@ -78,35 +78,40 @@ include('session.php');
       <div id="page-wrapper" >
         <!-- /.     //subscribers   -->
 
-        <script type="text/javascript">
-        $(document).ready(function() {
-          $('#upload').bind("click",function()
-          {
-            var imgVal = $('#fileToUpload').val();
-            if(imgVal=='')
-            {
-              alert("empty input file");
-              return false;
-            }
 
-
-          });
-        });
-      </script>
-      <form action="uploadservice.php" method="post" enctype="multipart/form-data">
-        Select image to upload:
-        <input type="file" name="fileToUpload" id="fileToUpload" required><br>
-        <input type="submit" value="Upload Image" id="upload" name="submit">
-      </form>
 
       <br>
       <br>
 
       <section id="services">
-
         <h1>Preview Services</h1><br><br><br>
 
         <?php
+        $record="";
+        $error="";
+        if (isset($_POST["change1"])){
+            $sql= "UPDATE services SET keyword= '".$_POST["t1"]."' WHERE`services`.`id`= 5";
+              if (!mysqli_query($db, $sql)) {
+                  $error = "Error updating record: " ;
+                  echo "error updating";
+              }
+        }
+        if (isset($_POST["change2"])){
+            $sql= "UPDATE services SET keyword= '".$_POST["t2"]."' WHERE`services`.`id`= 6";
+              if (!mysqli_query($db, $sql)) {
+                  $error = "Error updating record: " ;
+                  echo "error updating";
+              }
+        }
+        if (isset($_POST["change3"])){
+            $sql= "UPDATE services SET keyword= '".$_POST["t3"]."' WHERE`services`.`id`= 7";
+              if (!mysqli_query($db, $sql)) {
+                  $error = "Error updating record: " ;
+                  echo "error updating";
+              }
+        }
+
+
         $sql = "SELECT * FROM services";
         $result = $db->query($sql);
         $arr = array();
@@ -125,39 +130,85 @@ include('session.php');
           echo "0 results";
         }
 
-
-
-         ?>
+        ?>
 
 
 
 
-         <form class="" method="post" >
+        <script type="text/javascript">
+        $(document).ready(function() {
+          $('#upload').bind("click",function()
+          {
+            var imgVal = $('#fileToUpload').val();
+            if(imgVal=='')
+            {
+              alert("empty input file");
+              return false;
+            }
+
+
+          });
+        });
+        </script>
+
+
+
           <div class="cards-container">
-            <div class="card modify">
+            <form class="card modify" method="post">
               <img src="../user/media/images/<?php echo $arrimg[0]; ?>">
               <h3 id="test1"><?php echo $arr[0]; ?></h3>
-              <input type="text" name="text1" value="">
-              <input type="submit" id="btn1" name="change1" value="change1">
+<span>
+                  <input required type="text" name="t1" value="">
+                  <input type="submit" id="btn1" name="change1" value="change">
+                  </form>
+                      <form action="uploadservice.php" method="post" enctype="multipart/form-data">
+                          <input type="file" name="fileToUpload" id="fileToUpload" required>
+                          <input type="hidden" name="id" value="5">
+                          <input type="submit" value="Upload Image" id="upload" name="submit1">
+                      </form>
+</span>
 
-            </div>
-            <div class="card buy">
+
+
+            <form class="card buy" method="post">
               <img src="../user/media/images/<?php echo $arrimg[1]; ?>">
               <h3 id="2"><?php echo $arr[1]; ?></h3>
-              <input  type="text" name="text2" value="">
-              <input type="submit" name="change2" value="change2">
+<span>
+                  <input required type="text" name="t2" value="">
+                  <input type="submit" name="change2" value="change2">
+                    </form>
+                      <form action="uploadservice.php" method="post" enctype="multipart/form-data">
+                          <input type="file" name="fileToUpload" id="fileToUpload" required>
+                          <input type="hidden" name="id" value="6">
 
-            </div>
-            <div class="card repair">
+                          <input type="submit" value="Upload Image" id="upload" name="submit">
+                      </form>
+</span>
+
+
+
+            <form class="card repair" method="post">
               <img src="../user/media/images/<?php echo $arrimg[2]; ?>">
               <h3 id="3"><?php echo $arr[2]; ?></h3>
-              <input  type="text" name="text3" value="">
-              <input type="submit" name="change3" value="change3">
-            </div>
+  <span>
+                <input required type="text" name="t3" value="">
+                <input type="submit" name="change3" value="change">
+                  </form>
+                  <form action="uploadservice.php" method="post" enctype="multipart/form-data">
+                      <input type="file" name="fileToUpload" id="fileToUpload" required>
+                      <input type="hidden" name="id" value="7">
+                      <input type="submit" value="Upload Image" id="upload" name="submit3">
+
+  </span>
+            </form>
+
+
           </div>
+
+
+
         </section>
 
-      </form>
 
 
 

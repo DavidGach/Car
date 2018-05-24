@@ -78,15 +78,21 @@
 
   <?php
   $arr = array();
+  $arr1=array();
     $sql="SELECT * FROM social";
+    $i=0;
     $result = $db->query($sql);
     if ($result->num_rows > 0) {
         // output data of each row
         while($row = $result->fetch_assoc()) {
-          $arr[$row["id"]-1]=$row["url"];
+          $arr[$i]=$row["url"];
+          $arr1[$i]=$row["id"];
+          $i++;
         }
         }else {
-          echo "error";
+          $arr[2]="plus.google.com";
+          $arr[0]="facebook.com";
+          $arr[1]="twitter.com";
         }
 
 
@@ -96,9 +102,21 @@
 
 
 <form class="form-horizontal" method="POST" action="update.php">
+
         <div class="form-group">
-          <label class="control-label col-sm-2" for="pwd">facebook:<br>
-            <a href="<?php echo $arr[0]; ?>"> <?php echo $arr[0]; ?> </a>
+          <label class="control-label col-sm-2" for="pwd">Google+:<br>
+            <a href="https://<?php echo $arr[1]; ?>"> <?php echo $arr[2]; ?> </a>
+            <input type="hidden" name="googleh" value="<?php echo $arr1[2]; ?>">
+          </label>
+          <div class="col-sm-10">
+
+            <input type="text" class="form-control" name="Google" >
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="pwd">Facebook:<br>
+            <a href="https://<?php echo $arr[0]; ?>"> <?php echo $arr[0]; ?> </a>
+            <input type="hidden" name="facebookh" value="<?php echo $arr1[0]; ?>">
 
           </label>
           <div class="col-sm-10">
@@ -106,22 +124,13 @@
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label col-sm-2" for="pwd">instagram:<br>
-            <a href="<?php echo $arr[1]; ?>"> <?php echo $arr[2]; ?> </a>
-
-          </label>
-          <div class="col-sm-10">
-
-            <input type="text" class="form-control" name="tweeter" >
-          </div>
-        </div>
-        <div class="form-group">
           <label class="control-label col-sm-2" for="pwd">twitter:<br>
-            <a href="<?php echo $arr[2]; ?>"> <?php echo $arr[1]; ?> </a>
+            <a href="https://<?php echo $arr[2]; ?>"> <?php echo $arr[1]; ?> </a>
+            <input type="hidden" name="twitterh" value="<?php echo $arr1[1]; ?>">
 
            </label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" name="instagram"  >
+            <input type="text" class="form-control" name="twitter"  >
           </div>
         </div>
 

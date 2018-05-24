@@ -115,7 +115,7 @@ $arrimg = array();
 				<div class="mountains"></div>
 				<div class="trees"></div>
 				<div class="car">
-					<img src="media/images/<?php echo $arrimg[3]; ?>">
+					<img src="media/images/car.png">
 				</div>
 			</div>
 
@@ -132,9 +132,24 @@ $arrimg = array();
 					<h2>Contact Information</h2>
 					<h3>click to view</h3>
 					<ul class="s">
-						<li class="gplus"><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
-						<li class="facebook"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-						<li class="twitter"><a href="#"><i class="fab fa-twitter"></i></a></li>
+						<?php
+						 		$arr = array();
+						    $sql="SELECT * FROM social";
+						    $result = $db->query($sql);
+						    if ($result->num_rows > 0) {
+						        // output data of each row
+						        while($row = $result->fetch_assoc()) {
+						          $arr[$row["id"]-1]=$row["url"];
+						        }
+						        }else {
+										 $arr[2]="plus.google.com";
+ 					           $arr[0]="facebook.com";
+ 					           $arr[1]="twitter.com";
+						        }
+							?>
+						<li class="gplus"><a href="https://<?php echo $arr[2]; ?>"><i class="fab fa-google-plus-g"></i></a></li>
+						<li class="facebook"><a href="https://<?php echo $arr[0]; ?>"><i class="fab fa-facebook-f"></i></a></li>
+						<li class="twitter"><a href="https://<?php echo $arr[1]; ?>"><i class="fab fa-twitter"></i></a></li>
 					</ul>
 				</div>
 

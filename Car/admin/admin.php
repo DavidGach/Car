@@ -20,7 +20,9 @@
 
      if($count == 1) {
         $_SESSION['login_user'] = $myusername;
+
         
+
                  header("location: home.php");
 
      }else {

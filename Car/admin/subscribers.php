@@ -99,8 +99,7 @@
       if ($result->num_rows > 0) {
           // output data of each row
           while($row = $result->fetch_assoc()) {
-    ?>
-
+        ?>
     <script>
 
     $(document).ready(function(){
@@ -112,9 +111,25 @@
 
 
     <div id="<?php  echo  $row["name"].$row["id"]."flip"; ?>" class="flip"><?php echo  $row["email"]; ?></div>
-    <div id="<?php  echo $row["name"].$row["id"]."panel";?>" class="panel"><h3><b>Subject:</b> <?php echo  $row["subject"]; ?></h3>
-      <h5><b>Name:</b><?php echo  $row["name"]; ?></h5>
-      <h5><b>Text:</b><?php echo  $row["text"]; ?></h5>
+    <div id="<?php  echo $row["name"].$row["id"]."panel";?>" class="panel"><h3><b>Subject:</b> <?php echo  $row["subject"]; ?>
+      <span style="opacity: 0.5;"> <b style="margin-left:40px;">Recive:</b>
+        <?php
+      if ($row["resiveImages"]==1){
+        echo "Images";
+      }
+      if ($row["resivePromotions"]==1){
+        echo "Promotions"; echo " ";
+      }
+      if ($row["resiveUpdates"]==1){
+        echo "Updates"; echo " ";
+      }
+      if ($row["resiveJobOffers"]==1){
+        echo "JobOffers"; echo " ";
+      } ?>
+      </span>
+    </h3><br>
+      <h5><b>Name:</b><?php echo  $row["name"]; ?> </h5> <hr> 
+      <h5><?php echo  $row["text"]; ?></h5><hr>
       <h5><a href="del1.php?id=<?php echo  $row["id"]; ?>" style="color:red;">delete</a></h5>
 
     </div>
