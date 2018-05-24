@@ -93,6 +93,12 @@
           $arr[2]="plus.google.com";
           $arr[0]="facebook.com";
           $arr[1]="twitter.com";
+          for ($i=0; $i < 3; $i++) {
+            $sql="INSERT INTO social (url)VALUES ('". $arr[$i] ."')";
+            if (!mysqli_query($db, $sql)) {
+                echo " <script>alert('error saving')</script>";
+            }
+          }
         }
 
 

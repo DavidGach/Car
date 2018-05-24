@@ -123,11 +123,21 @@ include('session.php');
           while($row = $result->fetch_assoc()) {
             array_push($arr,$row["keyword"]) ;
             array_push($arrimg,$row["url"]) ;
-            array_push($id,$row["id"]) ;
+            array_push($id,$row["id"]);
 
           }
         } else {
-          echo "0 results";
+          $arrimg[0]="modify.png";
+          $arr[0]="modify";
+          $arrimg[1]="buy.png";
+          $arr[1]="buy";
+          $arrimg[2]="repair.png";
+          $arr[2]="repair";
+          $id[0]=5;
+          $id[1]=6;
+          $id[2]=7;
+          
+
         }
 
         ?>
@@ -163,7 +173,7 @@ include('session.php');
                   </form>
                       <form action="uploadservice.php" method="post" enctype="multipart/form-data">
                           <input type="file" name="fileToUpload" id="fileToUpload" required>
-                          <input type="hidden" name="id" value="5">
+                          <input type="hidden" name="id" value="<?php echo $id[0]; ?>">
                           <input type="submit" value="Upload Image" id="upload" name="submit1">
                       </form>
 </span>
@@ -179,7 +189,7 @@ include('session.php');
                     </form>
                       <form action="uploadservice.php" method="post" enctype="multipart/form-data">
                           <input type="file" name="fileToUpload" id="fileToUpload" required>
-                          <input type="hidden" name="id" value="6">
+                          <input type="hidden" name="id" value="<?php echo $id[1]; ?>">
 
                           <input type="submit" value="Upload Image" id="upload" name="submit">
                       </form>
@@ -196,7 +206,7 @@ include('session.php');
                   </form>
                   <form action="uploadservice.php" method="post" enctype="multipart/form-data">
                       <input type="file" name="fileToUpload" id="fileToUpload" required>
-                      <input type="hidden" name="id" value="7">
+                      <input type="hidden" name="id" value="<?php echo $id[2]; ?>">
                       <input type="submit" value="Upload Image" id="upload" name="submit3">
 
   </span>

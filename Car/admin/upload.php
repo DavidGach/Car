@@ -39,7 +39,7 @@ if ($uploadOk == 0) {
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
         echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
         include("config.php");
-        $sql = "INSERT INTO images (url)VALUES ('".basename( $_FILES["fileToUpload"]["name"])."')";
+        $sql = "INSERT INTO images (url, cardate )VALUES ('".basename( $_FILES["fileToUpload"]["name"])."','".date("Y/m/d")."')";
 
         if ($db->query($sql) === TRUE) {
             echo "New record created successfully";

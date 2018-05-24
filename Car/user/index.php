@@ -45,7 +45,7 @@ include("config.php"); ?>
 
 <?php
 
-$sql = "SELECT id, url FROM images";
+$sql = "SELECT * FROM images";
     $result = $db->query($sql);
 
     if ($result->num_rows > 0) {
@@ -55,7 +55,7 @@ $sql = "SELECT id, url FROM images";
 
 			<div class="slide" style='background-image: url("media/images/slider/<?php echo $row["url"]; ?>");'>
 				<div class="slide-content">
-					<span class="date">27.11.</span>
+					<span class="date"><?php echo str_replace("-","/",$row["cardate"]); ?></span>
 					<span class="title">Vintage Auto Exhibition</span>
 				</div>
 			</div>
@@ -93,7 +93,12 @@ $arrimg = array();
           array_push($arrimg,$row["url"]) ;
         }
         } else {
-        echo "0 results";
+					$arrimg[0]="modify.png";
+					$arr[0]="modify";
+					$arrimg[1]="buy.png";
+					$arr[1]="buy";
+					$arrimg[2]="repair.png";
+					$arr[2]="repair";
         }
 
  ?>

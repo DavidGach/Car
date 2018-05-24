@@ -7,7 +7,7 @@
            if (!mysqli_query($db, $sql)) {
              echo "error";
            }else {
-             header("Location: admin.php");
+             header("Location: log-out.php");
            }
 
 

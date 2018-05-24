@@ -196,6 +196,14 @@ $(document).ready(function() {
                 // output data of each row
                 while($row = $result->fetch_assoc()) {
 
+
+                    if (isset($_POST["bt".$row["id"]])) {
+                      $sql = "UPDATE `images` SET `cardate` = '".$_POST["date"]."' WHERE `images`.`id` = ".$row["id"];
+                      if (!mysqli_query($db, $sql)) {
+                          echo " <script>alert('error saving')</script>";
+                      }
+                    }
+
                     ?>
 
                     <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter spray">
@@ -204,28 +212,23 @@ $(document).ready(function() {
 
 
                             <form method="post" action="home.php">
-                              <a  href="del.php?id=<?= $row['id'] ?>">Delete</a>
-                              <input style="margin-left: 10px; height: 30px; " type="date" name="date" value="<?php echo $row["date"]; ?>" >
+                              <a id="a<?php echo $row["id"]; ?>"  href="">Delete</a>
+
+                              <script type="text/javascript">
+                                  $(document).ready(function(){
+                                      $("#a<?php echo $row["id"]; ?>").click(function(){
+                                           document.getElementById("a<?php echo $row["id"]; ?>").href='del.php?id=<?php echo $row["id"] ?>';
+
+                                      });
+                                    });
+                              </script>
+
+                              <input style="margin-left: 10px; height: 30px; " type="date" name="date" value="<?php echo $row["cardate"]; ?>" >
                               <input type="submit" id="bt<?php echo $row["id"]; ?>" name="bt<?php echo $row["id"]; ?>" style="height: 30px; width: 60px;" value="save" >
 
                            </form>
 
-                           <?php
 
-                           if (isset($_POST["bt".$row["id"]])) {
-                             $sql = "UPDATE `images` SET `date` = '".$_POST["date"]."' WHERE `images`.`id` = ".$row["id"];
-                             if (!mysqli_query($db, $sql)) {
-                                 echo " <script>alert('error saving')</script>";
-                             }else {
-                               ?>
-                               <script type="text/javascript">
-                                 getElementById('bt<?php echo $row["id"]; ?>').value=<?php echo$_POST["date"]; ?>
-                               </script>
-                               <?php
-                             }
-                           }
-
-                           ?>
                            </div>
                            <div class="pics-holder">
                           		<div class="pic" style='background-image: url("../user/media/images/slider/<?php echo $row["url"];?>");'></div>

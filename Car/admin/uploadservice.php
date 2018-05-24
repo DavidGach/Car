@@ -51,6 +51,7 @@ if ($uploadOk == 0) {
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
         echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
 
+
         $sql = "UPDATE services SET url= '".basename($_FILES["fileToUpload"]["name"])."' WHERE`services`.`id`=".$_POST["id"];
 
         if ($db->query($sql) === TRUE) {
