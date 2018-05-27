@@ -11,6 +11,15 @@ function getRandomColor() {
 	return colors[Math.floor(Math.random() * colors.length)];
 }
 
+function getRandomPosition() {
+	for(var i = 0; i < dotsArray.length; i++) {
+		dotsArray[i].x = Math.random() * canvas.width;
+		dotsArray[i].y = Math.random() * canvas.height;
+	}
+	c.clearRect(0, 0, canvas.width, canvas.height);
+	render();
+}
+
 function Dot(x, y, radius) {
 	this.x = x;
 	this.y = y;
@@ -44,3 +53,14 @@ function render() {
 
 init();
 render();
+
+var arrowL = document.querySelector('#arrow-left');
+var arrowR = document.querySelector('#arrow-right');
+
+arrowL.addEventListener('click', function() {
+	getRandomPosition();
+});
+
+arrowR.addEventListener('click', function() {
+	getRandomPosition();
+});
